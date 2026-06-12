@@ -10,9 +10,11 @@ const app = express();
 
 // Configure CORS to accept requests ONLY from our Vite frontend
 app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'] // Crucial for Bearer tokens!
+  origin: [
+    'http://localhost:5173',
+    'https://query-genie-nine.vercel.app/' 
+  ],
+  credentials: true 
 }));
 
 app.use(express.json()); // This allows express to parse JSON bodies sent in requests
