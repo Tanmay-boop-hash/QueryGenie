@@ -14,7 +14,9 @@ app.use(cors({
     'http://localhost:5173',
     'https://query-genie-nine.vercel.app/' 
   ],
-  credentials: true 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Crucial for Bearer tokens!
+  credentials : true
 }));
 
 app.use(express.json()); // This allows express to parse JSON bodies sent in requests
