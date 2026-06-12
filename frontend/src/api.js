@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create a base instance of axios
 const API = axios.create({
-    baseURL: 'http://localhost:5001/api', 
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api', 
 });
 
 // Before ANY request leaves the frontend, this function runs.
