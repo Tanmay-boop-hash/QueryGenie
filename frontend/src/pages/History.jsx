@@ -11,7 +11,7 @@ export default function History() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await API.get('/history');
+        const res = await API.get('/query/history');
         setHistory(res.data.history);
       } catch (err) {
         if (err.response?.status === 401 || err.response?.status === 403) {

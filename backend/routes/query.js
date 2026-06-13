@@ -61,4 +61,21 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
+// --- GET: Fetch user's query history ---
+router.get('/history', authenticateToken, async (req, res) => {
+  try {
+    const currentUserId = req.user.id || req.user.userId;
+    
+    const history = await pool.query(
+      'SELECT * FROM query_history WHERE user_id = $1 ORDER BY created_at DESC',
+      [currentUserId]
+    );
+    
+    res.json(history.rows);
+  } catch (error) {
+    console.error("Error fetching history:", error);
+    res.status(500).json({ error: "Failed to fetch history" });
+  }
+});
+
 export default router;
