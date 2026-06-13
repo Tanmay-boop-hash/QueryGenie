@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://query-genie-nine.vercel.app/' 
+    'https://query-genie-nine.vercel.app' 
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'], // Crucial for Bearer tokens!
