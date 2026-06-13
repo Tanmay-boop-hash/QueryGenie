@@ -12,7 +12,7 @@ export default function History() {
     const fetchHistory = async () => {
       try {
         const res = await API.get('/query/history');
-        setHistory(res.data.history);
+        setHistory(res.data);
       } catch (err) {
         if (err.response?.status === 401 || err.response?.status === 403) {
           navigate('/login');
@@ -55,7 +55,7 @@ export default function History() {
         <div className="flex h-40 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
           <p className="text-sm font-medium text-slate-500">Loading your past queries...</p>
         </div>
-      ) : history.length === 0 ? (
+      ) : history?.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 py-20 text-center">
           <svg className="mb-4 h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
