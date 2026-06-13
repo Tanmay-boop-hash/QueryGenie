@@ -37,10 +37,17 @@ router.post('/', authenticateToken, async (req, res) => {
       generatedSql = generatedSql.replace(/^```\n/, '').replace(/\n```$/, '');
     }
 
+    const currentUserId = req.user.id || req.user.userId;
+
+    if (!currentUserId) {
+      console.error("Token payload:", req.user);
+      return res.status(401).json({ error: "User identity could not be verified from token." });
+    }
+
     // Save strictly the SQL to the history database
     const newHistory = await pool.query(
       'INSERT INTO query_history (user_id, user_text, generated_sql) VALUES ($1, $2, $3) RETURNING *',
-      [req.user.id, user_text, generatedSql]
+      [currentUserId, user_text, generatedSql]
     );
 
     res.json({ 
